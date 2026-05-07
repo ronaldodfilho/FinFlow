@@ -10,7 +10,7 @@ import {
 } from 'recharts';
 import { TrendingUp, TrendingDown, DollarSign, RefreshCw, ArrowUpRight } from 'lucide-react';
 import { api } from '../services/api';
-import { useAuthStore } from '../store/authStore';
+import { useAuthStore, AuthState } from '../store/authStore';
 
 interface Transaction {
   id: number;
@@ -39,7 +39,7 @@ const Dashboard = () => {
   const [loading, setLoading] = useState(true);
   const [syncing, setSyncing] = useState(false);
   const [syncMessage, setSyncMessage] = useState('');
-  const user = useAuthStore((state) => state.user);
+  const user = useAuthStore((state: AuthState) => state.user);
 
   const fetchTransactions = async () => {
     try {

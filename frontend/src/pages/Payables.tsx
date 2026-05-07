@@ -97,17 +97,17 @@ const Payables = () => {
             <div>
               <label className="block text-sm text-finflow-textMuted mb-1">Descrição</label>
               <input required className="w-full bg-finflow-dark border border-finflow-border rounded-lg px-3 py-2 text-white text-sm focus:outline-none focus:border-finflow-primary"
-                value={form.description} onChange={(e) => setForm({ ...form, description: e.target.value })} placeholder="Ex: Aluguel" />
+                value={form.description} onChange={(e: React.ChangeEvent<HTMLInputElement>) => setForm({ ...form, description: e.target.value })} placeholder="Ex: Aluguel" />
             </div>
             <div>
               <label className="block text-sm text-finflow-textMuted mb-1">Valor (R$)</label>
               <input required type="number" step="0.01" className="w-full bg-finflow-dark border border-finflow-border rounded-lg px-3 py-2 text-white text-sm focus:outline-none focus:border-finflow-primary"
-                value={form.amount} onChange={(e) => setForm({ ...form, amount: e.target.value })} placeholder="0.00" />
+                value={form.amount} onChange={(e: React.ChangeEvent<HTMLInputElement>) => setForm({ ...form, amount: e.target.value })} placeholder="0.00" />
             </div>
             <div>
               <label className="block text-sm text-finflow-textMuted mb-1">Vencimento</label>
               <input required type="date" className="w-full bg-finflow-dark border border-finflow-border rounded-lg px-3 py-2 text-white text-sm focus:outline-none focus:border-finflow-primary"
-                value={form.dueDate} onChange={(e) => setForm({ ...form, dueDate: e.target.value })} />
+                value={form.dueDate} onChange={(e: React.ChangeEvent<HTMLInputElement>) => setForm({ ...form, dueDate: e.target.value })} />
             </div>
             <div className="sm:col-span-3 flex gap-3 justify-end">
               <button type="button" onClick={() => setShowForm(false)} className="px-4 py-2 text-finflow-textMuted hover:text-white text-sm transition-colors">Cancelar</button>

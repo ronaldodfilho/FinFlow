@@ -1,13 +1,13 @@
 import { create } from 'zustand';
 
-interface User {
+export interface User {
   id: number;
   name: string;
   email: string;
   role: string;
 }
 
-interface AuthState {
+export interface AuthState {
   token: string | null;
   user: User | null;
   isAuthenticated: boolean;
@@ -23,7 +23,7 @@ export const useAuthStore = create<AuthState>((set) => {
     token: storedToken,
     user: storedUser ? JSON.parse(storedUser) : null,
     isAuthenticated: !!storedToken,
-    login: (token, user) => {
+    login: (token: string, user: User) => {
       localStorage.setItem('@FinFlow:token', token);
       localStorage.setItem('@FinFlow:user', JSON.stringify(user));
       set({ token, user, isAuthenticated: true });
