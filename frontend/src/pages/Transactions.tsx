@@ -100,17 +100,17 @@ const Transactions = () => {
             <div>
               <label className="block text-sm text-finflow-textMuted mb-1">Descrição</label>
               <input required className="w-full bg-finflow-dark border border-finflow-border rounded-lg px-3 py-2 text-white text-sm focus:outline-none focus:border-finflow-primary"
-                value={form.description} onChange={(e) => setForm({ ...form, description: e.target.value })} placeholder="Ex: Venda de produto" />
+                value={form.description} onChange={(e: React.ChangeEvent<HTMLInputElement>) => setForm({ ...form, description: e.target.value })} placeholder="Ex: Venda de produto" />
             </div>
             <div>
               <label className="block text-sm text-finflow-textMuted mb-1">Valor (R$)</label>
               <input required type="number" step="0.01" className="w-full bg-finflow-dark border border-finflow-border rounded-lg px-3 py-2 text-white text-sm focus:outline-none focus:border-finflow-primary"
-                value={form.amount} onChange={(e) => setForm({ ...form, amount: e.target.value })} placeholder="0.00" />
+                value={form.amount} onChange={(e: React.ChangeEvent<HTMLInputElement>) => setForm({ ...form, amount: e.target.value })} placeholder="0.00" />
             </div>
             <div>
               <label className="block text-sm text-finflow-textMuted mb-1">Tipo</label>
               <select className="w-full bg-finflow-dark border border-finflow-border rounded-lg px-3 py-2 text-white text-sm focus:outline-none focus:border-finflow-primary"
-                value={form.type} onChange={(e) => setForm({ ...form, type: e.target.value })}>
+                value={form.type} onChange={(e: React.ChangeEvent<HTMLSelectElement>) => setForm({ ...form, type: e.target.value as 'INCOME' | 'EXPENSE' })}>
                 <option value="EXPENSE">Despesa</option>
                 <option value="INCOME">Receita</option>
               </select>
@@ -118,12 +118,12 @@ const Transactions = () => {
             <div>
               <label className="block text-sm text-finflow-textMuted mb-1">Data</label>
               <input required type="date" className="w-full bg-finflow-dark border border-finflow-border rounded-lg px-3 py-2 text-white text-sm focus:outline-none focus:border-finflow-primary"
-                value={form.transactionDate} onChange={(e) => setForm({ ...form, transactionDate: e.target.value })} />
+                value={form.transactionDate} onChange={(e: React.ChangeEvent<HTMLInputElement>) => setForm({ ...form, transactionDate: e.target.value })} />
             </div>
             <div>
               <label className="block text-sm text-finflow-textMuted mb-1">Categoria</label>
               <input className="w-full bg-finflow-dark border border-finflow-border rounded-lg px-3 py-2 text-white text-sm focus:outline-none focus:border-finflow-primary"
-                value={form.category} onChange={(e) => setForm({ ...form, category: e.target.value })} placeholder="Ex: Alimentação" />
+                value={form.category} onChange={(e: React.ChangeEvent<HTMLInputElement>) => setForm({ ...form, category: e.target.value })} placeholder="Ex: Alimentação" />
             </div>
             <div className="flex items-end gap-3 justify-end">
               <button type="button" onClick={() => setShowForm(false)} className="px-4 py-2 text-finflow-textMuted hover:text-white text-sm transition-colors">Cancelar</button>
@@ -142,7 +142,7 @@ const Transactions = () => {
           placeholder="Buscar por descrição ou categoria..."
           className="flex-1 bg-finflow-card border border-finflow-border rounded-xl px-4 py-2.5 text-white text-sm focus:outline-none focus:border-finflow-primary placeholder:text-finflow-textMuted"
           value={search}
-          onChange={(e) => setSearch(e.target.value)}
+          onChange={(e: React.ChangeEvent<HTMLInputElement>) => setSearch(e.target.value)}
         />
         <div className="flex gap-2">
           {(['ALL', 'INCOME', 'EXPENSE'] as const).map((f) => (

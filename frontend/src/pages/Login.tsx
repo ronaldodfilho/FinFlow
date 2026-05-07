@@ -1,5 +1,5 @@
 import React, { useState } from 'react';
-import { useAuthStore } from '../store/authStore';
+import { useAuthStore, AuthState } from '../store/authStore';
 import { api } from '../services/api';
 import { useNavigate } from 'react-router-dom';
 
@@ -7,7 +7,7 @@ const Login = () => {
   const [email, setEmail] = useState('');
   const [password, setPassword] = useState('');
   const [error, setError] = useState('');
-  const login = useAuthStore((state) => state.login);
+  const login = useAuthStore((state: AuthState) => state.login);
   const navigate = useNavigate();
 
   const handleLogin = async (e: React.FormEvent) => {
@@ -47,7 +47,7 @@ const Login = () => {
               required
               className="w-full bg-finflow-dark border border-finflow-border rounded-lg px-4 py-2.5 text-white focus:outline-none focus:border-finflow-primary focus:ring-1 focus:ring-finflow-primary transition-colors"
               value={email}
-              onChange={(e) => setEmail(e.target.value)}
+              onChange={(e: React.ChangeEvent<HTMLInputElement>) => setEmail(e.target.value)}
               placeholder="seu@email.com"
             />
           </div>
@@ -59,7 +59,7 @@ const Login = () => {
               required
               className="w-full bg-finflow-dark border border-finflow-border rounded-lg px-4 py-2.5 text-white focus:outline-none focus:border-finflow-primary focus:ring-1 focus:ring-finflow-primary transition-colors"
               value={password}
-              onChange={(e) => setPassword(e.target.value)}
+              onChange={(e: React.ChangeEvent<HTMLInputElement>) => setPassword(e.target.value)}
               placeholder="••••••••"
             />
           </div>
