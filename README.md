@@ -1,5 +1,5 @@
 <div align="center">
-  <h1>⚡ FinFlow</h1>
+  <h1>FinFlow</h1>
   <p><strong>Sistema Financeiro Full Stack Moderno</strong></p>
   <p>ERP Financeiro corporativo inspirado em plataformas como Nubank, Stripe e Inter</p>
 
@@ -102,7 +102,7 @@ FinFlow/
 
 ### 1. Clonar o repositório
 ```bash
-git clone https://github.com/seu-usuario/finflow.git
+git clone https://github.com/ronaldodfilho/finflow.git
 cd finflow
 ```
 
