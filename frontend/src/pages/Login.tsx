@@ -1,7 +1,7 @@
 import React, { useState } from 'react';
 import { useAuthStore, AuthState } from '../store/authStore';
 import { api } from '../services/api';
-import { useNavigate } from 'react-router-dom';
+import { useNavigate, useLocation, Link } from 'react-router-dom';
 
 const Login = () => {
   const [email, setEmail] = useState('');
@@ -9,6 +9,8 @@ const Login = () => {
   const [error, setError] = useState('');
   const login = useAuthStore((state: AuthState) => state.login);
   const navigate = useNavigate();
+  const location = useLocation();
+  const successMessage = location.state?.message;
 
   const handleLogin = async (e: React.FormEvent) => {
     e.preventDefault();
@@ -32,6 +34,12 @@ const Login = () => {
           <h2 className="text-3xl font-bold text-white mb-2">Bem-vindo(a)</h2>
           <p className="text-finflow-textMuted">Faça login para acessar o FinFlow</p>
         </div>
+
+        {successMessage && (
+          <div className="bg-green-500/10 border border-green-500/50 text-green-500 p-3 rounded-lg text-sm mb-6 text-center">
+            {successMessage}
+          </div>
+        )}
 
         {error && (
           <div className="bg-red-500/10 border border-red-500/50 text-red-500 p-3 rounded-lg text-sm mb-6 text-center">
@@ -71,6 +79,15 @@ const Login = () => {
             Entrar
           </button>
         </form>
+
+        <div className="mt-6 text-center">
+          <p className="text-finflow-textMuted text-sm">
+            Não tem uma conta?{' '}
+            <Link to="/register" className="text-finflow-primary hover:text-finflow-primaryHover font-medium transition-colors">
+              Criar Conta
+            </Link>
+          </p>
+        </div>
       </div>
     </div>
   );

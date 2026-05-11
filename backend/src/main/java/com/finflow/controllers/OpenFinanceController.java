@@ -38,24 +38,58 @@ public class OpenFinanceController {
         
         // Simulating Open Finance API delay and mock data generation
         Random random = new Random();
-        int newTxCount = random.nextInt(3) + 2; // 2 to 4 transactions
+        int newTxCount = random.nextInt(5) + 5; 
         
         List<Transaction> syncedTransactions = new ArrayList<>();
         
-        String[] descriptions = {"Supermercado", "Posto de Gasolina", "Ifood", "Pix Recebido", "Salário", "Farmácia"};
-        TransactionType[] types = {TransactionType.EXPENSE, TransactionType.EXPENSE, TransactionType.EXPENSE, TransactionType.INCOME, TransactionType.INCOME, TransactionType.EXPENSE};
+        // Probabilidade REALISTA de banco: 80% despesas, 20% receitas
+        double expenseProbability = 0.80;
+        
+        String[] incomeDesc = {
+            "Pix Recebido - Venda", "Salário Mensal", "Rendimentos Tesouro Direto", 
+            "Bônus Semestral", "Reembolso Despesas", "Dividendos", "Pix de Amigo"
+        };
+        String[] incomeCat = {"Transferência", "Salário", "Investimentos", "Salário", "Outros", "Investimentos", "Transferência"};
+
+        String[] expenseDesc = {
+            "Supermercado BH", "Posto Shell", "Ifood - Almoço", "Farmácia Droga Raia", 
+            "Netflix Mensal", "Amazon Prime", "Pagamento Empréstimo", "Juros Banco", 
+            "Fatura Cartão Nubank", "Uber - Viagem", "Padaria Panini", "Restaurante Sabor",
+            "Assinatura Spotify", "Loja de Conveniência", "Manutenção Carro"
+        };
+        String[] expenseCat = {
+            "Alimentação", "Transporte", "Alimentação", "Saúde", 
+            "Assinaturas", "Assinaturas", "Dívidas", "Taxas", 
+            "Cartão de Crédito", "Transporte", "Alimentação", "Alimentação",
+            "Assinaturas", "Alimentação", "Transporte"
+        };
         
         for (int i = 0; i < newTxCount; i++) {
-            int index = random.nextInt(descriptions.length);
-            
             Transaction tx = new Transaction();
             tx.setUser(user);
-            tx.setDescription(descriptions[index]);
-            tx.setAmount(BigDecimal.valueOf(random.nextDouble() * 500 + 10).setScale(2, java.math.RoundingMode.HALF_UP));
-            tx.setType(types[index]);
-            tx.setTransactionDate(LocalDateTime.now().minusDays(random.nextInt(7)));
-            tx.setCategory("Geral");
-            tx.setIsSync(true); // Flag to show it came from Open Finance
+            
+            boolean isExpense = random.nextDouble() < expenseProbability;
+            
+            if (isExpense) {
+                int idx = random.nextInt(expenseDesc.length);
+                tx.setDescription(expenseDesc[idx]);
+                tx.setType(TransactionType.EXPENSE);
+                tx.setCategory(expenseCat[idx]);
+                
+                double baseAmount = expenseCat[idx].equals("Dívidas") ? 800 : 15;
+                tx.setAmount(BigDecimal.valueOf(random.nextDouble() * 250 + baseAmount).setScale(2, java.math.RoundingMode.HALF_UP));
+            } else {
+                int idx = random.nextInt(incomeDesc.length);
+                tx.setDescription(incomeDesc[idx]);
+                tx.setType(TransactionType.INCOME);
+                tx.setCategory(incomeCat[idx]);
+                
+                double baseAmount = incomeCat[idx].equals("Salário") ? 3500 : 50;
+                tx.setAmount(BigDecimal.valueOf(random.nextDouble() * 500 + baseAmount).setScale(2, java.math.RoundingMode.HALF_UP));
+            }
+            
+            tx.setTransactionDate(LocalDateTime.now().minusDays(random.nextInt(15)));
+            tx.setIsSync(true);
             
             syncedTransactions.add(transactionRepository.save(tx));
         }
