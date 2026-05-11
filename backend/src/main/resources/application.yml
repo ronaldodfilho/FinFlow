@@ -2,7 +2,7 @@ spring:
   application:
     name: finflow
   datasource:
-    url: jdbc:postgresql://localhost:5432/finflow_db
+    url: jdbc:postgresql://localhost:5433/finflow_db
     username: finflow_user
     password: finflow_password
     driver-class-name: org.postgresql.Driver
